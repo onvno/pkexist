@@ -1,0 +1,12 @@
+#!/usr/bin/env node
+
+'use strict';
+
+const search = require('../index');
+var list = process.argv.slice(2);
+for (var i=0; i<list.length; i++){
+  var item = list[i];
+  (function(s){
+    search(s);
+  })(item)
+}
