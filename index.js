@@ -3,7 +3,11 @@ const chalk = require('chalk');
 
 function search(moduleName,existlist=[],nonelist=[] ) {
     return new Promise(function(resolve, reject) {
-        request('https://www.npmjs.org/package/' + moduleName, function(error, response, body) {
+				var address = {
+					official: 'https://www.npmjs.org/package/',
+					taobao: 'https://npm.taobao.org/package/'
+				}
+        request(address.taobao + moduleName, function(error, response, body) {
             if (error) {
                 return reject(error);
             } 
