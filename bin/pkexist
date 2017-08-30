@@ -4,9 +4,16 @@
 
 const search = require('../index');
 var list = process.argv.slice(2);
-for (var i=0; i<list.length; i++){
-  var item = list[i];
-  (function(s){
-    search(s);
-  })(item)
-}
+let existlist = [];
+let nonelist = [];
+
+let prolist = list.map((item, index)=>{
+  return search(item,existlist,nonelist);
+})
+
+Promise.all(prolist).then((allData)=> {
+  console.log('已占用', existlist);
+  console.log('可用名', nonelist);
+}).catch((err)=>{
+  console.log(err);
+})
